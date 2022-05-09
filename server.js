@@ -2,7 +2,8 @@ const http = require('http')
 const express = require('express')
 const { Server } = require('socket.io')
 const cors = require('cors')
-const tabuleiro = require('./Tabuleiro')
+const Tabuleiro = require('./Tabuleiro')
+const tabuleiro = new Tabuleiro()
 
 const app = express()
 app.use(cors())
@@ -24,13 +25,15 @@ io.on('connection', (socket) => {
     console.log(socket.id)
     socket.on('messageFromServer', (arg1, arg2, callback) => {
         callback({
-            data: tabuleiro
+            data: tabuleiro.tabuleiro
         })
         }
     )
 
-    socket.on('messageToServer', (dataFromClient) => {
-        console.log(dataFromClient)
+    socket.on('jogada', (dadosDaJogada) => {
+        let coluna = dadosDaJogada.message[1]
+        let linha = dadosDaJogada.message[0]
+        tabuleiro.jogada(linha, coluna)
     })
 
     socket.on('send_message', (data) => {
