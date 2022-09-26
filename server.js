@@ -40,3 +40,7 @@ io.on('connection', (socket) => {
         console.log(data)
     })
 })
+
+// focar sempre no que eh esperado do jogo BATALHA NAVAL
+
+// TODO: atualmente eh um tabuleiro pra todos, fazer com que seja criado 1 tabuleiro por sala ( fazer tela de inicio para selecionar a sala e depois usar o codigo para cada sala com o path diferente /sala1, /sala2, juntar isso com o rooms do socketio)
